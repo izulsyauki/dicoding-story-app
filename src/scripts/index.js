@@ -3,6 +3,7 @@ import Router from './routes/index';
 import initializeDrawer from './utils/drawer.js';
 import App from './pages/app';
 import { registerServiceWorker } from './utils/index.js';
+import Camera from './utils/camera.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   initializeDrawer();
@@ -26,5 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   window.addEventListener('hashchange', async () => {
     await app.renderPage();
+
+    Camera.stopAllStreams();
   });
 });

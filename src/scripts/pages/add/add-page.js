@@ -84,7 +84,6 @@ class AddPage {
       model: API,
     });
 
-    // Cek apakah user sudah login
     const token = getAccessToken();
     if (!token) {
       this.#showLoginPrompt();
@@ -100,12 +99,10 @@ class AddPage {
     this.#form = document.getElementById('addStoryForm');
     const photoInput = document.getElementById('photo');
 
-    // Preview gambar yang dipilih
     photoInput.addEventListener('change', (event) => {
       this.#handlePhotoChange(event);
     });
 
-    // Submit form
     this.#form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
@@ -133,7 +130,6 @@ class AddPage {
     const takePictureBtn = document.getElementById('takePictureBtn');
     const cameraContainer = document.getElementById('camera-container');
 
-    // Sembunyikan container kamera saat awal
     cameraContainer.style.display = 'none';
 
     openCameraBtn.addEventListener('click', async () => {
@@ -159,16 +155,12 @@ class AddPage {
       const imageBase64 = await this.#camera.takePicture();
       this.#takenPhoto = await convertBase64ToBlob(imageBase64, 'image/png');
 
-      // Tampilkan preview
       document.getElementById('imagePreview').innerHTML = `<img src="${imageBase64}" alt="Preview">`;
 
-      // Update informasi foto
       document.getElementById('photo-info').textContent = 'Gambar dari kamera telah dipilih';
 
-      // Hapus required dari input file karena sudah ada foto dari kamera
       document.getElementById('photo').removeAttribute('required');
 
-      // Tutup kamera setelah mengambil gambar
       this.#closeCamera();
     });
   }
@@ -184,7 +176,7 @@ class AddPage {
       reader.onload = (e) => {
         imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
         this.#photoPreview = e.target.result;
-        this.#takenPhoto = null; // Reset foto dari kamera jika memilih file
+        this.#takenPhoto = null;
         photoInfo.textContent = `File dipilih: ${file.name}`;
       };
 
@@ -204,7 +196,6 @@ class AddPage {
       return false;
     }
 
-    // Validasi ukuran file (max 1MB) jika menggunakan file upload
     if (photo && photo.size > 1024 * 1024) {
       this.showSubmitError('Ukuran foto maksimal 1MB');
       return false;
@@ -230,8 +221,6 @@ class AddPage {
       </div>
     `;
   }
-
-  // View methods for presenter to call
 
   updateLocationFields(latitude, longitude) {
     document.getElementById('lat').value = latitude;
@@ -275,7 +264,6 @@ class AddPage {
     this.#form.reset();
     document.getElementById('imagePreview').innerHTML = '';
 
-    // Pastikan kamera dimatikan
     this.#closeCamera();
 
     setTimeout(() => {
@@ -290,28 +278,23 @@ class AddPage {
         locate: true,
       });
 
-      // Persiapkan marker untuk koordinat yang dipilih
       const centerCoordinate = this.#map.getCenter();
 
-      // Update input fields dengan koordinat saat ini
       this.updateLocationFields(centerCoordinate.latitude, centerCoordinate.longitude);
 
-      // Tambahkan marker yang bisa di-drag
       const draggableMarker = this.#map.addMarker(
         [centerCoordinate.latitude, centerCoordinate.longitude],
         { draggable: true },
       );
 
-      // Update koordinat saat marker di-drag
       draggableMarker.addEventListener('move', (event) => {
         const coordinate = event.target.getLatLng();
         this.updateLocationFields(coordinate.lat, coordinate.lng);
       });
 
-      // Update koordinat saat peta di-klik
       this.#map.addMapEventListener('click', (event) => {
         draggableMarker.setLatLng(event.latlng);
-        // Tetap pusat dengan tampilan pengguna
+
         event.sourceTarget.flyTo(event.latlng);
       });
     } catch (error) {

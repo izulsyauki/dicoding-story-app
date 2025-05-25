@@ -26,7 +26,7 @@ const ViewTransition = {
       await transition.finished;
     } catch (error) {
       console.error('Error saat menerapkan transisi:', error);
-      // Jika terjadi error, jalankan callback langsung
+
       updateCallback();
     }
   }
