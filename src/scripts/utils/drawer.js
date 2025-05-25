@@ -10,13 +10,15 @@ const initializeDrawer = () => {
 
         if (isLoggedIn) {
             navList.innerHTML = `
+                <li id="push-notification-tools" class="push-notification-tools"></li>
                 <li><a href="#/">Beranda</a></li>
                 <li><a href="#/add">Tambah Story</a></li>
                 <li><a href="#/about">Tentang</a></li>
-                <li><a href="#/logout" id="logout-button" class="logout-button">Logout</a></li>
+                <li><a href="#/logout" id="logout-button" class="logout-button"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             `;
         } else {
             navList.innerHTML = `
+                <li id="push-notification-tools" class="push-notification-tools"></li>
                 <li><a href="#/login">Login</a></li>
                 <li><a href="#/register">Register</a></li>
                 <li><a href="#/about">Tentang</a></li>

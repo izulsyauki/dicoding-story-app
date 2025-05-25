@@ -1,6 +1,7 @@
 import routes from '../routes/routes';
 import { getActiveRoute } from '../routes/url-parser';
-import { setupSkipToContent } from '../utils';
+import { generateSubscribeButtonTemplate } from '../templates';
+import { isServiceWorkerAvailable, setupSkipToContent } from '../utils';
 
 class App {
   #content;
@@ -17,6 +18,14 @@ class App {
     setupSkipToContent(this.#skipLinkButton, this.#content);
   }
 
+  async #setupPushNotification() {
+    const pushNotificationTools = document.getElementById('push-notification-tools');
+    pushNotificationTools.innerHTML = generateSubscribeButtonTemplate();
+    document.getElementById('subscribe-button').addEventListener('click', () => {
+      // TODO: subscribe to push manager
+    });
+  }
+
   async renderPage() {
     const url = getActiveRoute();
     const page = routes[url];
@@ -27,6 +36,10 @@ class App {
         this.#content.innerHTML =
           await pageInstance.render();
         await pageInstance.afterRender();
+
+        if (isServiceWorkerAvailable()) {
+          this.#setupPushNotification();
+        }
       }
     } else {
       this.#content.innerHTML = `<p>Halaman tidak ditemukan</p>`

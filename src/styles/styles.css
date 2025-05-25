@@ -385,6 +385,49 @@ header {
   background-color: #7ac5ea;
 }
 
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: lightskyblue;
+  color: #333;
+  border: 2px solid #333;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus {
+  outline: 3px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+.btn i {
+  margin-left: 8px;
+}
+
+.btn.btn-transparent {
+  background-color: transparent;
+  border: 2px solid lightskyblue;
+}
+
+.btn.btn-transparent:hover {
+  background-color: lightskyblue;
+  color: #333;
+}
+
 /* Detail Story */
 .story-detail-card {
   max-width: 800px;
