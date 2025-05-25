@@ -110,6 +110,7 @@ header {
 /* MAIN */
 .main-content {
   padding-block: 20px;
+  min-height: calc(100vh - 210px);
 }
 
 /* Form Styles */
