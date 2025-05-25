@@ -933,6 +933,27 @@ select {
   }
 }
 
+
+.footer {
+  background-color: lightskyblue;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+}
+
+.footer p {
+  color: #333;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Media query untuk tampilan mobile */
 @media screen and (max-width: 768px) {
   .navigation-drawer {
     right: -250px;
@@ -956,9 +977,18 @@ select {
   .nav-list {
     margin-top: 20px;
   }
+
+  .nav-list .logout-button {
+    color: white;
+    background-color: #333;
+  }
+
+  .nav-list .logout-button :focus {
+    background-color: #141e16;
+  }
 }
 
-/* Tambahkan media query untuk tampilan desktop */
+/* media query untuk tampilan desktop */
 @media screen and (min-width: 768px) {
   .navigation-drawer {
     position: static;

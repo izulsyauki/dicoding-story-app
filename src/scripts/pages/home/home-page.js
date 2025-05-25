@@ -45,13 +45,11 @@ class HomePage {
 
     document.getElementById('stories-container').innerHTML = storiesHTML;
 
-    // Inisialisasi peta dengan semua stories yang memiliki lokasi
     this.#initMap(stories);
   }
 
   async #initMap(stories) {
     try {
-      // Pastikan library peta sudah dimuat
       if (typeof L !== 'undefined') {
         const map = L.map('map').setView([-2.5489, 118.0149], 5); // Koordinat Indonesia
 
@@ -59,7 +57,6 @@ class HomePage {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Tambahkan marker untuk setiap story yang memiliki koordinat
         stories.forEach(story => {
           if (story.lat && story.lon) {
             L.marker([story.lat, story.lon]).addTo(map)

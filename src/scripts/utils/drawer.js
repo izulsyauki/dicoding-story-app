@@ -13,7 +13,7 @@ const initializeDrawer = () => {
                 <li><a href="#/">Beranda</a></li>
                 <li><a href="#/add">Tambah Story</a></li>
                 <li><a href="#/about">Tentang</a></li>
-                <li><a href="#/logout" id="logout-button" class="logout-btn">Logout</a></li>
+                <li><a href="#/logout" id="logout-button" class="logout-button">Logout</a></li>
             `;
         } else {
             navList.innerHTML = `
