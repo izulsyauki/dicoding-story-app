@@ -1,0 +1,51 @@
+export function showFormattedDate(date, locale = 'en-US', options = {}) {
+  return new Date(date).toLocaleDateString(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    ...options,
+  });
+}
+
+export function setupSkipToContent(element, mainContent) {
+  element.addEventListener('click', (event) => {
+    event.preventDefault();
+    element.blur();
+    mainContent.focus();
+    mainContent.scrollIntoView();
+  });
+}
+
+export function sleep(time = 1000) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+export function convertBase64ToBlob(base64, mimeType) {
+  const byteString = atob(base64.split(',')[1]);
+  const ab = new ArrayBuffer(byteString.length);
+  const ia = new Uint8Array(ab);
+
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  return new Blob([ab], { type: mimeType });
+}
+
+export function isServiceWorkerAvailable() {
+  return 'serviceWorker' in navigator;
+}
+
+export async function registerServiceWorker() {
+  if (!isServiceWorkerAvailable()) {
+    console.log('Service Worker API unsupported');
+    return;
+  }
+
+  try {
+    const registration = await navigator.serviceWorker.register('/sw.js');
+    console.log('Service worker telah terpasang', registration);
+  } catch (error) {
+    console.error('Failed to install service worker:', error);
+  }
+}
