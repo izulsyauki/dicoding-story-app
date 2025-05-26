@@ -92,7 +92,7 @@ class DetailPage {
         }).addTo(map);
 
         const locationName = await Map.getPlaceNameByCoordinate(lat, lon);
-        
+
         L.marker([lat, lon]).addTo(map)
           .bindPopup(`<strong>${locationName}</strong><br>Latitude: ${lat}, Longitude: ${lon}`)
           .openPopup();

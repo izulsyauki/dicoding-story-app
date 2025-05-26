@@ -80,46 +80,6 @@ export function generateCommentsListErrorTemplate(message) {
   `;
 }
 
-export function generateReportItemTemplate({
-  id,
-  title,
-  description,
-  evidenceImages,
-  reporterName,
-  createdAt,
-  placeNameLocation,
-}) {
-  return `
-    <div tabindex="0" class="report-item" data-reportid="${id}">
-      <img class="report-item__image" src="${evidenceImages[0]}" alt="${title}">
-      <div class="report-item__body">
-        <div class="report-item__main">
-          <h2 id="report-title" class="report-item__title">${title}</h2>
-          <div class="report-item__more-info">
-            <div class="report-item__createdat">
-              <i class="fas fa-calendar-alt"></i> ${showFormattedDate(createdAt, 'id-ID')}
-            </div>
-            <div class="report-item__location">
-              <i class="fas fa-map"></i> ${placeNameLocation}
-            </div>
-          </div>
-        </div>
-        <div id="report-description" class="report-item__description">
-          ${description}
-        </div>
-        <div class="report-item__more-info">
-          <div class="report-item__author">
-            Dilaporkan oleh: ${reporterName}
-          </div>
-        </div>
-        <a class="btn report-item__read-more" href="#/reports/${id}">
-          Selengkapnya <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-  `;
-}
-
 export function generateDamageLevelMinorTemplate() {
   return `
     <span class="report-detail__damage-level__minor" data-damage-level="minor">Kerusakan Rendah</span>
@@ -135,34 +95,6 @@ export function generateDamageLevelModerateTemplate() {
 export function generateDamageLevelSevereTemplate() {
   return `
     <span class="report-detail__damage-level__severe" data-damage-level="severe">Kerusakan Berat</span>
-  `;
-}
-
-export function generateDamageLevelBadge(damageLevel) {
-  if (damageLevel === 'minor') {
-    return generateDamageLevelMinorTemplate();
-  }
-
-  if (damageLevel === 'moderate') {
-    return generateDamageLevelModerateTemplate();
-  }
-
-  if (damageLevel === 'severe') {
-    return generateDamageLevelSevereTemplate();
-  }
-
-  return '';
-}
-
-export function generateReportDetailImageTemplate(imageUrl = null, alt = '') {
-  if (!imageUrl) {
-    return `
-      <img class="report-detail__image" src="images/placeholder-image.jpg" alt="Placeholder Image">
-    `;
-  }
-
-  return `
-    <img class="report-detail__image" src="${imageUrl}" alt="${alt}">
   `;
 }
 
@@ -264,7 +196,7 @@ export function generateReportDetailTemplate({
 
 export function generateSubscribeButtonTemplate() {
   return `
-    <button id="subscribe-button" class="btn subscribe-button">
+    <button id="subscribe-button" class="btn">
       Subscribe <i class="fas fa-bell"></i>
     </button>
   `;

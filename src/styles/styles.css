@@ -420,12 +420,11 @@ header {
 
 .btn.btn-transparent {
   background-color: transparent;
-  border: 2px solid lightskyblue;
+  border: 2px solid #333;
 }
 
 .btn.btn-transparent:hover {
-  background-color: lightskyblue;
-  color: #333;
+  background-color: #dbdbdb;
 }
 
 /* Detail Story */
@@ -947,6 +946,23 @@ select {
 
 .logout-button i {
   font-size: 16px;
+}
+
+.story-detail-body-actions-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.story-detail-actions-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
 @media screen and (width > 1000px) {
