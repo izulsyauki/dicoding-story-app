@@ -34,11 +34,19 @@ header {
   gap: 30px;
 }
 
-.brand-name {
+.brand-name-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
   font-size: 1.125rem;
   font-weight: bold;
   text-decoration: none;
   color: #333;
+}
+
+.brand-name-link-image {
+  width: 35px;
 }
 
 .navigation-drawer {
@@ -476,7 +484,7 @@ header {
   padding: 20px;
   border-radius: 8px;
   margin-top: 25px;
-  border-left: 4px solid lightskyblue;
+  border-left: 4px solid #87cefa;
 }
 
 .story-location-title {
@@ -935,13 +943,16 @@ select {
   background-color: #f8f9fa;
   border-radius: 6px;
   text-decoration: none;
-  color: #333;
+  color: red !important;
   font-weight: bold;
   transition: background-color 0.2s ease;
 }
 
 .logout-button:hover {
   background-color: #e9ecef;
+  transform: translateY(-2px);
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logout-button i {
@@ -1039,12 +1050,29 @@ select {
   }
 
   .nav-list .logout-button {
-    color: white;
-    background-color: #333;
+    border: 2px solid red;
+    text-align: center;
+    padding: 6px 16px;
+  }
+
+  .nav-list .logout-button li {
+    text-align: center;
+    width: 100%;
   }
 
   .nav-list .logout-button :focus {
     background-color: #141e16;
+  }
+
+  .btn {
+    width: 100%;
+    border: none;
+  }
+
+  .nav-list li a #add-button {
+    padding: 0;
+    width: 100%;
+    margin: 0;
   }
 }
 

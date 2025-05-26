@@ -33,7 +33,7 @@ class HomePage {
   showStories(stories) {
     const storiesHTML = stories.map((story) => `
       <article class="story-card">
-        <img src="${story.photoUrl}" alt="Foto story dari ${story.name}: ${story.description.substring(0, 50)}..." class="story-image">
+        <img src="${story.photoUrl ? story.photoUrl : 'images/placeholder-image.jpg'}" alt="Foto story dari ${story.name}: ${story.description.substring(0, 50)}..." class="story-image">
         <div class="story-content">
           <h3>${story.name}</h3>
           <time class="story-date" datetime="${new Date(story.createdAt).toISOString()}">${showFormattedDate(story.createdAt)}</time>
