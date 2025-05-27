@@ -42,7 +42,6 @@ class DetailPage {
     });
 
     this.#presenter.showStoryDetail();
-    this.#presenter.showSaveButton();
   }
 
   populateStoryDetail(message, story) {

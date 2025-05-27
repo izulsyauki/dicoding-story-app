@@ -24,6 +24,7 @@ class DetailPresenter {
 
             const { story } = response;
             this.#view.populateStoryDetail(response.message, story);
+            await this.showSaveButton();
         } catch (error) {
             console.error("showStoryDetail: error:", error);
             this.#view.populateStoryDetailError(error.message);
