@@ -1,8 +1,13 @@
+import {
+  generateRemoveStoryButtonTemplate,
+  generateSaveStoryButtonTemplate,
+} from '../../templates';
 import API from '../../data/api';
 import { parseActivePathname } from '../../routes/url-parser';
 import { showFormattedDate } from '../../utils';
 import DetailPresenter from './detail-presenter';
 import Map from '../../utils/map';
+import Database from '../../data/database';
 
 class DetailPage {
   #presenter = null;
@@ -33,9 +38,11 @@ class DetailPage {
     this.#presenter = new DetailPresenter(id, {
       view: this,
       apiModel: API,
+      dbModel: Database,
     });
 
     this.#presenter.showStoryDetail();
+    this.#presenter.showSaveButton();
   }
 
   populateStoryDetail(message, story) {
@@ -56,6 +63,12 @@ class DetailPage {
               <div id="map" class="story-map" aria-label="Peta lokasi story"></div>
             </div>
           ` : ''}
+          <div class="story-detail-body-actions-container">
+            <h2>Aksi</h2>
+            <div class="story-detail-actions-buttons">
+              <div id="save-actions-container"></div>
+            </div>
+          </div>
         </div>
       </div>
     `;
@@ -120,6 +133,42 @@ class DetailPage {
 
   hideStoryDetailLoading() {
     document.getElementById('story-detail-loading-container').innerHTML = '';
+  }
+
+  renderSaveButton() {
+    document.getElementById('save-actions-container').innerHTML =
+      generateSaveStoryButtonTemplate();
+
+    document.getElementById('story-detail-save').addEventListener('click', async () => {
+      await this.#presenter.saveStory();
+      await this.#presenter.showSaveButton();
+    });
+  }
+
+  saveToBookmarkSuccessfully(message) {
+    console.log(message);
+  }
+
+  saveToBookmarkFailed(message) {
+    alert(message);
+  }
+
+  renderRemoveButton() {
+    document.getElementById('save-actions-container').innerHTML =
+      generateRemoveStoryButtonTemplate();
+
+    document.getElementById('story-detail-remove').addEventListener('click', async () => {
+      await this.#presenter.removeStory();
+      await this.#presenter.showSaveButton();
+    });
+  }
+
+  removeFromBookmarkSuccessfully(message) {
+    console.log(message);
+  }
+
+  removeFromBookmarkFailed(message) {
+    alert(message);
   }
 }
 

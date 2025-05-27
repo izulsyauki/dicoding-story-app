@@ -210,18 +210,18 @@ export function generateUnsubscribeButtonTemplate() {
   `;
 }
 
-export function generateSaveReportButtonTemplate() {
+export function generateSaveStoryButtonTemplate() {
   return `
-    <button id="report-detail-save" class="btn btn-transparent">
-      Simpan laporan <i class="far fa-bookmark"></i>
+    <button id="story-detail-save" class="btn btn-transparent">
+      Simpan cerita <i class="far fa-bookmark"></i>
     </button>
   `;
 }
 
-export function generateRemoveReportButtonTemplate() {
+export function generateRemoveStoryButtonTemplate() {
   return `
-    <button id="report-detail-remove" class="btn btn-transparent">
-      Buang laporan <i class="fas fa-bookmark"></i>
+    <button id="story-detail-remove" class="btn btn-transparent">
+      Buang cerita <i class="fas fa-bookmark"></i>
     </button>
   `;
 }

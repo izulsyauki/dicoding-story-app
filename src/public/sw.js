@@ -42,7 +42,7 @@ registerRoute(
 
 registerRoute(
     ({ request, url }) => {
-        const baseUrl = new URL(CONFIG.BASE_URL);
+        const baseUrl = new URL(CONFIG.BASE_URL || "https://story-api.dicoding.dev/v1");
         return baseUrl.origin === url.origin && request.destination !== 'image';
     },
     new NetworkFirst({
@@ -52,7 +52,7 @@ registerRoute(
 
 registerRoute(
     ({ request, url }) => {
-        const baseUrl = new URL(CONFIG.BASE_URL);
+        const baseUrl = new URL(CONFIG.BASE_URL || "https://story-api.dicoding.dev/v1");
         return baseUrl.origin === url.origin && request.destination === 'image';
     },
     new StaleWhileRevalidate({
