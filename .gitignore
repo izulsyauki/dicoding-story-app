@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Workbox/PWA generated files
+**/dev-dist/*
+**/dist/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -2,7 +2,6 @@ import '../styles/styles.css';
 import Router from './routes/index';
 import initializeDrawer from './utils/drawer.js';
 import App from './pages/app';
-import { registerServiceWorker } from './utils/index.js';
 import Camera from './utils/camera.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -22,8 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     navigationDrawerContent: document.querySelector('#navigation-drawer'),
   });
   await app.renderPage();
-
-  await registerServiceWorker();
 
   window.addEventListener('hashchange', async () => {
     await app.renderPage();
