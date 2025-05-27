@@ -26,7 +26,6 @@ const initializeDrawer = () => {
             `;
         } else {
             navList.innerHTML = `
-                <li id="push-notification-tools" class="push-notification-tools"></li>
                 <li><a href="#/login">Login</a></li>
                 <li><a href="#/register">Register</a></li>
                 <li><a href="#/about">Tentang</a></li>
