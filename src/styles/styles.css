@@ -29,7 +29,8 @@ header {
   padding-block: 20px;
 
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  /* justify-content: space-between; */
   align-items: center;
   gap: 30px;
 }
@@ -51,6 +52,7 @@ header {
 
 .navigation-drawer {
   position: fixed;
+  flex: 1;
   top: 0;
   right: 0;
   width: 250px;
@@ -96,10 +98,19 @@ header {
 
 .nav-list {
   list-style: none;
-
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
+  align-items: center;
   gap: 10px 20px;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
 .nav-list li a {
@@ -700,7 +711,6 @@ input,
 textarea,
 select {
   font-size: 16px;
-  /* Prevents iOS zoom */
 }
 
 .form-text {
@@ -811,7 +821,6 @@ input,
 textarea,
 select {
   font-size: 16px;
-  /* Prevents iOS zoom */
 }
 
 .form-text {
@@ -1005,6 +1014,92 @@ select {
 }
 
 
+/* Media query mobile */
+@media screen and (max-width: 768px) {
+  .main-header {
+    justify-content: space-between;
+  }
+
+  .navigation-drawer {
+    position: fixed;
+    top: 90px;
+    right: -250px;
+    width: 250px;
+    height: calc(100vh - 90px);
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  .navigation-drawer.open {
+    transform: translateX(-250px);
+  }
+
+  .navigation-drawer .nav-list {
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+    margin-top: 0px;
+    background-color: white;
+  }
+
+  .nav-left,
+  .nav-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .nav-list li a {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* Konsistensi button di mobile */
+  .btn {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .logout-button {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #dc3545;
+  }
+
+  /* Hamburger button */
+  .drawer-button {
+    display: block;
+    padding: 8px;
+    font-size: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .add-button {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .footer {
   background-color: lightskyblue;
   padding: 20px 0;
@@ -1082,7 +1177,7 @@ select {
     position: static;
     transform: none;
     box-shadow: none;
-    width: auto;
+    width: 100%;
     height: auto;
     padding: 0;
     opacity: 1;

@@ -10,25 +10,33 @@ const initializeDrawer = () => {
 
         if (isLoggedIn) {
             navList.innerHTML = `
-            <li><a href="#/">Beranda</a></li>
-            <li><a href="#/about">Tentang</a></li>
-            <li id="push-notification-tools" class="push-notification-tools"></li>
-            <a href="#/add" class="add-button">
-            <li>
-                <button class="btn">Tambah Story <i class="fas fa-plus"></i></button>
-                </li>
-                </a>
-                <a href="#/logout" id="logout-button" class="logout-button">
+            <div class="nav-left">
+                <li><a href="#/">Beranda</a></li>
+                <li><a href="#/about">Tentang</a></li>
+            </div>
+            <div class="nav-right">
+                <li id="push-notification-tools" class="push-notification-tools"></li>
+                <a href="#/add" class="add-button">
                 <li>
-                <i class="fas fa-sign-out-alt"></i> Logout
-                </li>
-                </a>
+                    <button class="btn">Tambah Story <i class="fas fa-plus"></i></button>
+                    </li>
+                    </a>
+                    <a href="#/logout" id="logout-button" class="logout-button">
+                    <li>
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                    </li>
+                    </a>
+            </div>
             `;
         } else {
             navList.innerHTML = `
+            <div class="nav-left">
                 <li><a href="#/login">Login</a></li>
+            </div
+            <div class="nav-right">
                 <li><a href="#/register">Register</a></li>
                 <li><a href="#/about">Tentang</a></li>
+            </div>
             `;
         }
 
