@@ -5,6 +5,8 @@ import RegisterPage from '../pages/auth/register/register-page';
 import DetailPage from '../pages/detail/detail-page';
 import AddPage from '../pages/add/add-page';
 import { checkAuthenticatedRoute, checkUnauthenticatedRouteOnly, getLogout } from '../utils/auth';
+import BookmarkPage from '../pages/bookmark/bookmark-page';
+import NotFoundPage from '../pages/not-found/not-found-page';
 
 const routes = {
   '/': () => checkAuthenticatedRoute(new HomePage()),
@@ -17,6 +19,8 @@ const routes = {
     getLogout();
     return null;
   },
+  '/bookmark': () => checkAuthenticatedRoute(new BookmarkPage()),
+  notFound: () => new NotFoundPage(),
 };
 
 export default routes;

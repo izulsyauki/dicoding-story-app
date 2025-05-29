@@ -12,13 +12,8 @@ class Router {
       const url = getActiveRoute();
       const page = routes[url];
 
-      if (!page) {
-        this._content.innerHTML = '<div class="container"><h2>404 - Halaman Tidak Ditemukan</h2></div>';
-        return;
-      }
-
-      const pageInstance = page();
-
+      const pageInstance = page ? page() : routes.notFound();
+      
       if (!pageInstance) return;
 
       await ViewTransition.apply(async () => {

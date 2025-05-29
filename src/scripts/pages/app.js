@@ -7,6 +7,7 @@ import { isCurrentPushSubscriptionAvailable, subscribe, unsubscribe } from '../u
 class App {
   #content;
   #skipLinkButton;
+  #currentPage = null;
 
   constructor({ content, skipLinkButton }) {
     this.#content = content;
@@ -20,46 +21,78 @@ class App {
   }
 
   async #setupPushNotification() {
-    const pushNotificationTools = document.getElementById('push-notification-tools');
-    const isSubscribed = await isCurrentPushSubscriptionAvailable();
+    try {
+      const pushNotificationTools = document.getElementById('push-notification-tools');
+      if (!pushNotificationTools) return;
 
-    if (isSubscribed) {
-      pushNotificationTools.innerHTML = generateUnsubscribeButtonTemplate();
-      document.getElementById('unsubscribe-button').addEventListener('click', () => {
-        unsubscribe().finally(() => {
-          this.#setupPushNotification();
+      const isSubscribed = await isCurrentPushSubscriptionAvailable();
+
+      if (isSubscribed) {
+        pushNotificationTools.innerHTML = generateUnsubscribeButtonTemplate();
+        const unsubscribeButton = document.getElementById('unsubscribe-button');
+        if (unsubscribeButton) {
+          unsubscribeButton.addEventListener('click', () => {
+            unsubscribe().finally(() => {
+              this.#setupPushNotification();
+            });
+          });
+        }
+        return;
+      }
+
+      pushNotificationTools.innerHTML = generateSubscribeButtonTemplate();
+      const subscribeButton = document.getElementById('subscribe-button');
+      if (subscribeButton) {
+        subscribeButton.addEventListener('click', () => {
+          subscribe().finally(() => {
+            this.#setupPushNotification();
+          });
         });
-      });
-
-      return;
+      }
+    } catch (error) {
+      console.error('Error setting up push notification:', error);
     }
-
-    pushNotificationTools.innerHTML = generateSubscribeButtonTemplate();
-    document.getElementById('subscribe-button').addEventListener('click', () => {
-      subscribe().finally(() => {
-        this.#setupPushNotification();
-      });
-    });
-
   }
 
   async renderPage() {
-    const url = getActiveRoute();
-    const page = routes[url];
+    try {
+      const url = getActiveRoute();
+      const page = routes[url];
 
-    if (page) {
-      const pageInstance = page();
-      if (pageInstance) {
-        this.#content.innerHTML =
-          await pageInstance.render();
-        await pageInstance.afterRender();
+      if (this.#currentPage && typeof this.#currentPage.destroy === 'function') {
+        this.#currentPage.destroy();
+      }
+
+      const pageInstance = page ? page() : routes.notFound();
+      this.#currentPage = pageInstance;
+
+      if (!pageInstance) return;
+
+      const renderContent = async () => {
+        this.#content.innerHTML = await pageInstance.render();
+
+        if (pageInstance.afterRender) {
+          await pageInstance.afterRender();
+        }
 
         if (isServiceWorkerAvailable()) {
-          this.#setupPushNotification();
+          await this.#setupPushNotification();
         }
+      };
+
+      if (document.startViewTransition) {
+        await document.startViewTransition(renderContent).finished;
+      } else {
+        await renderContent();
       }
-    } else {
-      this.#content.innerHTML = `<p>Halaman tidak ditemukan</p>`
+    } catch (error) {
+      console.error('Error rendering page:', error);
+      this.#content.innerHTML = `
+        <div class="container">
+          <h2>Terjadi Kesalahan</h2>
+          <p>${error.message}</p>
+        </div>
+      `;
     }
   }
 }

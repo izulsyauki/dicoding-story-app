@@ -12,6 +12,7 @@ const initializeDrawer = () => {
             navList.innerHTML = `
             <div class="nav-left">
                 <li><a href="#/">Beranda</a></li>
+                <li><a href="#/bookmark">Cerita Tersimpan</a></li>
                 <li><a href="#/about">Tentang</a></li>
             </div>
             <div class="nav-right">
@@ -32,7 +33,7 @@ const initializeDrawer = () => {
             navList.innerHTML = `
             <div class="nav-left">
                 <li><a href="#/login">Login</a></li>
-            </div
+            </div>
             <div class="nav-right">
                 <li><a href="#/register">Register</a></li>
                 <li><a href="#/about">Tentang</a></li>
