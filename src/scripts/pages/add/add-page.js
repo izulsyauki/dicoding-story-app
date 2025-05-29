@@ -273,9 +273,12 @@ class AddPage {
 
   async initialMap() {
     try {
+      Map.cleanupMap('#map');
+
       this.#map = await Map.build('#map', {
         zoom: 15,
         locate: true,
+        scrollWheelZoom: true,
       });
 
       const centerCoordinate = this.#map.getCenter();
@@ -312,6 +315,13 @@ class AddPage {
 
   hideMapLoading() {
     document.getElementById('map-loading-container').innerHTML = '';
+  }
+
+  destroy() {
+    if (this.#map) {
+      this.#map.destroy();
+      this.#map = null;
+    }
   }
 }
 

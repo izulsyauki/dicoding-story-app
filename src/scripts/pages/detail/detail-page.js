@@ -97,7 +97,11 @@ class DetailPage {
   async #initMap(lat, lon) {
     try {
       if (typeof L !== 'undefined') {
-        const map = L.map('map').setView([lat, lon], 13);
+        const map = L.map('map', {
+          scrollWheelZoom: true,
+          zoom: 13,
+          center: [lat, lon]
+        });
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -206,7 +206,6 @@ async function unsubscribePushNotification({ endpoint }) {
   };
 }
 
-
 const API = {
   register: getRegistered,
   login: getLogin,

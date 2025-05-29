@@ -1,9 +1,12 @@
 import API from '../../data/api';
 import { showFormattedDate } from '../../utils/index';
+import { generateStoriesListErrorTemplate, generateStoryListEmptyTemplate } from '../../templates';
 import HomePresenter from './home-presenter';
+import Map from '../../utils/map';
 
 class HomePage {
   #presenter = null;
+  #map = null;
 
   async render() {
     return `
@@ -50,6 +53,8 @@ class HomePage {
 
   async #initMap(stories) {
     try {
+      Map.cleanupMap('#map');
+
       if (typeof L !== 'undefined') {
         const map = L.map('map').setView([-2.5489, 118.0149], 5); // Koordinat Indonesia
 
@@ -82,11 +87,11 @@ class HomePage {
   }
 
   showEmptyStories() {
-    document.getElementById('stories-container').innerHTML = '<p>Belum ada stories</p>';
+    document.getElementById('stories-container').innerHTML = generateStoryListEmptyTemplate();
   }
 
   showErrorMessage(message) {
-    document.getElementById('stories-container').innerHTML = `<p>Error: ${message}</p>`;
+    document.getElementById('stories-container').innerHTML = generateStoriesListErrorTemplate(message);
   }
 
   showLoading() {
@@ -99,6 +104,13 @@ class HomePage {
     const loadingElement = document.getElementById('loading-indicator');
     if (loadingElement) {
       loadingElement.innerHTML = '';
+    }
+  }
+
+  destroy() {
+    if (this.#map) {
+      this.#map.remove();
+      this.#map = null;
     }
   }
 }
