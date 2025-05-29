@@ -76,8 +76,9 @@ class RegisterPage {
 
   showSubmitLoadingButton() {
     document.getElementById('submit-button-container').innerHTML = `
-      <button class="btn-primary" type="submit" disabled>
-        <span class="loading-spinner"></span> Daftar Akun
+     <button class="btn-primary" type="submit" disabled>
+        <span class="loading-spinner"></span>
+        Daftar Akun
       </button>
     `;
   }

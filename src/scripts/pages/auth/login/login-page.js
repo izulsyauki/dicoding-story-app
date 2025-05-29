@@ -73,7 +73,8 @@ class LoginPage {
   showSubmitLoadingButton() {
     document.getElementById('submit-button-container').innerHTML = `
       <button class="btn-primary" type="submit" disabled>
-        <span class="loading-spinner"></span> Masuk
+        <span class="loading-spinner"></span>
+        Masuk
       </button>
     `;
   }
