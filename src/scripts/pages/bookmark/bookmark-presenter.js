@@ -1,3 +1,5 @@
+import { getAccessToken } from "../../utils/auth";
+
 class BookmarkPresenter {
     #view;
     #model;
@@ -10,8 +12,8 @@ class BookmarkPresenter {
     async getSavedStories() {
         this.#view.showLoading();
         try {
-            const token = localStorage.getItem('token');
-            if (!token) {
+            const accessToken = getAccessToken();
+            if (!accessToken) {
                 this.#view.showLoginPrompt();
                 return;
             }

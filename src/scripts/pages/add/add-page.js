@@ -84,8 +84,8 @@ class AddPage {
       model: API,
     });
 
-    const token = getAccessToken();
-    if (!token) {
+    const accessToken = getAccessToken();
+    if (!accessToken) {
       this.#showLoginPrompt();
       return;
     }

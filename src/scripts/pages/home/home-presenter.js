@@ -1,3 +1,5 @@
+import { getAccessToken } from "../../utils/auth";
+
 class HomePresenter {
     #view;
     #model;
@@ -10,8 +12,8 @@ class HomePresenter {
     async getAllStories() {
         this.#view.showLoading();
         try {
-            const token = localStorage.getItem('token');
-            if (!token) {
+            const accessToken = getAccessToken();
+            if (!accessToken) {
                 this.#view.showLoginPrompt();
                 return;
             }
