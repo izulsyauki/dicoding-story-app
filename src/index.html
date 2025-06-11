@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/favicon.png" />
+  <title>Dicoding Story</title>
+
+  <script type="module" src="/scripts/index.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script type="module">
+    import { registerSW } from 'virtual:pwa-register'
+
+    registerSW({
+      immediate: true,
+      onNeedRefresh() {
+        console.log('New content available, click on reload button to update.');
+      },
+      onOfflineReady() {
+        console.log('App ready to work offline');
+      },
+      onRegistered(r) {
+        r && console.log('Service worker registered');
+      },
+      onRegisterError(error) {
+        console.error('Service worker registration failed:', error);
+      }
+    })
+  </script>
+</head>
+
+<body>
+  <header>
+    <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+    <div class="main-header container">
+      <a class="brand-name-link" href="#/">
+        <img class="brand-name-link-image" src="images/logo.png" alt="Dicoding Story Logo">
+        <span class="brand-name-link-text">Dicoding Story</span>
+      </a>
+
+      <nav id="navigation-drawer" class="navigation-drawer">
+        <ul id="nav-list" class="nav-list">
+          <!-- Menu navlist -->
+        </ul>
+      </nav>
+
+      <button id="drawer-button" class="drawer-button">☰</button>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-content"></main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Dicoding Story by Izulsyauki Imani. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
