@@ -55,7 +55,7 @@ class AddPresenter {
                 showNotification({
                     title: 'Gagal Menambahkan Story',
                     body: response.message,
-                    icon: '/images/icons/icon-192x192.png',
+                    icon: '/images/icons/icon-x192.png',
                 });
                 return;
             }
@@ -65,7 +65,7 @@ class AddPresenter {
             await requestNotificationPermission();
             showNotification('Story Berhasil Dibuat', {
                 body: `Anda telah membuat story baru dengan deskripsi: "${data.description}"`,
-                icon: '/images/icons/icon-192x192.png',
+                icon: '/images/icons/icon-x192.png',
             });
 
         } catch (error) {
